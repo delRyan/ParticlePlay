@@ -16,7 +16,8 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     //Inserts a new item into the queue.
-    public void insert(T item){
+    public void insert(T item)
+    {
         N++;
 
         growArray();
@@ -26,7 +27,8 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     //Removes and returns the minimum item in the queue.
-    public T deleteMinimum(){
+    public T deleteMinimum()
+    {
         T min = array[N];
         array[N] = null;
         N--;
@@ -39,12 +41,14 @@ public class PriorityQueue<T extends Comparable<T>> {
     //Returns the minimum item in the queue.
     public T minimum(){ return array[N]; }
 
-    private void growArray(){
+    private void growArray()
+    {
         if(N >= array.length){
             array = Arrays.copyOf(array, array.length*2);
         }
     }
-    private void shrinkArray(){
+    private void shrinkArray()
+    {
         if(N < array.length/4){
             array = Arrays.copyOf(array, array.length/2);
         }

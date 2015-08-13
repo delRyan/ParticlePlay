@@ -10,11 +10,13 @@ public class HeapSort{
     //The children of position k are 2k and 2k+1
     //Do not use position 0 out of convenience
 
-    public static <T> Comparable<T>[] sort(Comparable<T>[] array){
+    public static <T> Comparable<T>[] sort(Comparable<T>[] array)
+    {
         int N = array.length;
 
         //start from the smallest node that has children (heapSize/2) and work your way up sinking nodes to create the heap.
-        for(int k = N/2; k >= 1; k--){
+        for(int k = N/2; k >= 1; k--)
+        {
             sink(array, N, k);
         }
 
@@ -28,7 +30,8 @@ public class HeapSort{
         return array;
     }
 
-    public static void sink(Comparable[] array, int heapSize, int k){
+    public static void sink(Comparable[] array, int heapSize, int k)
+    {
 
         //while we are not at the end of a heap arm
         while (leftChildIndex(k) <= heapSize)
@@ -55,7 +58,8 @@ public class HeapSort{
         }
     }
 
-    public static void swim(Comparable[] array, int k){
+    public static void swim(Comparable[] array, int k)
+    {
 
         while (k > 1 && valueIsLessThan(array, parentIndexOf(k), k))
         {
@@ -64,11 +68,13 @@ public class HeapSort{
         }
     }
 
-    public static boolean valueIsLessThan(Comparable[] array, int indexI, int indexJ){
+    public static boolean valueIsLessThan(Comparable[] array, int indexI, int indexJ)
+    {
         return array[indexI].compareTo(array[indexJ]) < 0;
     }
 
-    public static void exchangeValues(Comparable[] array, int i, int j){
+    public static void exchangeValues(Comparable[] array, int i, int j)
+    {
         Comparable temp = array[i];
 
         array[i] = array[j];

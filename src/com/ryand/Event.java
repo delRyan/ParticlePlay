@@ -9,9 +9,27 @@ public class Event implements Comparable<Event> {
     private Particle a, b;
     private int countA, countB;
 
-    public int compareTo(Event that) {
-        if(this.time < that.time) return -1;
-        if(this.time > that.time) return 1;
+    public Event(double time, Particle a, Particle b)
+    {
+        this.time = time;
+        this.a = a;
+        this.b = b;
+
+        if(a != null) countA = a.count(); else countA = -1;
+        if(b != null) countB = b.count(); else countB = -1;
+    }
+
+    public boolean isValid()
+    {
+        if(a != null && a.count() != countA) return false;
+        if(b != null && b.count() != countB) return false;
+        return true;
+    }
+
+    public int compareTo(Event that)
+    {
+        if(time < that.time) return -1;
+        if(time > that.time) return 1;
         return 0;
     }
 }
