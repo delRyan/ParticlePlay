@@ -1,39 +1,55 @@
 package com.ryand;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.util.Arrays;
 
 /**
  * Created by Ryan on 8/9/2015.
  */
 public class PriorityQueue<T extends Comparable<T>> {
 
+    private int N = 0;
+    private T[] array;
+
     //Creates a new PQ with the given size.
     public PriorityQueue(int size){
-
+        array = (T[]) new Comparable[size];
     }
 
     //Inserts a new item into the queue.
     public void insert(T item){
+        N++;
 
-    }
+        growArray();
 
-    //Returns the minimum item in the queue.
-    T minimum(){
-        throw new NotImplementedException();
+        array[N] = item;
+        HeapSort.swim(array, N);
     }
 
     //Removes and returns the minimum item in the queue.
-    T deleteMinimum(){
-        throw new NotImplementedException();
+    public T deleteMinimum(){
+        T min = array[N];
+        array[N] = null;
+        N--;
+
+        shrinkArray();
+
+        return min;
     }
 
-    //Returns true if no items are in the queue.
-    boolean isEmpty(){
-        throw new NotImplementedException();
+    //Returns the minimum item in the queue.
+    public T minimum(){ return array[N]; }
+
+    private void growArray(){
+        if(N >= array.length){
+            array = Arrays.copyOf(array, array.length*2);
+        }
+    }
+    private void shrinkArray(){
+        if(N < array.length/4){
+            array = Arrays.copyOf(array, array.length/2);
+        }
     }
 
-    //Returns the number of items in the queue.
-    int size(){
-        throw new NotImplementedException();
-    }
+    public boolean isEmpty(){ return N == 0; }
+    public int size(){ return N; }
 }
