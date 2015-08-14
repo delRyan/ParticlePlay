@@ -48,9 +48,9 @@ public class Particle {
         double distance = radius + b.radius;
 
         //compute the normal force
-        double F = 2* mass * b.mass * velocityDotPosition / ((mass + b.mass) * distance);
-        double fx = F * dx / distance;
-        double fy = F * dy / distance;
+        double Force = 2* mass * b.mass * velocityDotPosition / ((mass + b.mass) * distance);
+        double fx = Force * dx / distance;
+        double fy = Force * dy / distance;
 
         vX += fx / mass;
         vY += fy / mass;
