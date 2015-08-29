@@ -5,8 +5,9 @@ package com.ryand;
  */
 public class Event implements Comparable<Event> {
 
-    private double time;
-    private Particle a, b;
+    public final double time;
+
+    public final Particle a, b;
     private int countA, countB;
 
     public Event(double time, Particle a, Particle b)

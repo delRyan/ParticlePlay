@@ -5,14 +5,11 @@ package com.ryand;
  */
 public class HeapSort{
 
-    //Binary Heap array storage:
-    //The parent of position k is located at k/2
-    //The children of position k are 2k and 2k+1
     //Do not use position 0 out of convenience
 
     public static <T> Comparable<T>[] sort(Comparable<T>[] array)
     {
-        int N = array.length;
+        int N = array.length - 1;
 
         //start from the smallest node that has children (heapSize/2) and work your way up sinking nodes to create the heap.
         for(int k = N/2; k >= 1; k--)
@@ -23,8 +20,8 @@ public class HeapSort{
         //exchange the largest element with the smallest spot, decrease the heap size by 1 and repair the heap.
         while(N > 1)
         {
-            exchangeValues(array, 1, N--);
-            sink(array, 1, N);
+            exchangeValues(array, N--, 1);
+            sink(array, N, 1);
         }
 
         return array;
