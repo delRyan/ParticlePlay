@@ -1,4 +1,4 @@
-package com.ryand;
+package main;
 
 /**
  * Created by Ryan on 8/12/2015.

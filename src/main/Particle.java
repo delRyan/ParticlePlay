@@ -1,4 +1,4 @@
-package com.ryand;
+package main;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

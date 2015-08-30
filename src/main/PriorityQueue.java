@@ -1,4 +1,4 @@
-package com.ryand;
+package main;
 
 import java.util.Arrays;
 
