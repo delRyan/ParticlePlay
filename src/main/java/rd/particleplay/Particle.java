@@ -46,16 +46,16 @@ public class Particle {
 
     public double timeToHitHorizontalWall(int areaHeight)
     {
-        if      (vY < 0)    { return -pY/vY; }
-        else if (vY > 0)    { return (areaHeight-pY)/vY; }
+        if      (vY < 0)    { return -(pY - radius)/vY; }
+        else if (vY > 0)    { return (areaHeight-(pY+radius))/vY; }
 
         return Double.POSITIVE_INFINITY;
     }
 
     public double timeToHitVerticleWall(int areaWidth)
     {
-        if      (vX < 0)    { return -pX/vX; }
-        else if (vX > 0)    { return (areaWidth-pX)/vX; }
+        if      (vX < 0)    { return -(pX - radius)/vX; }
+        else if (vX > 0)    { return (areaWidth-(pX+radius))/vX; }
 
         return Double.POSITIVE_INFINITY;
     }
