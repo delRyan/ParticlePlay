@@ -1,4 +1,4 @@
-package main;
+package rd.particleplay;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

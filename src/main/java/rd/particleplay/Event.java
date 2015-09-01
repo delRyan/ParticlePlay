@@ -1,4 +1,4 @@
-package main;
+package rd.particleplay;
 
 /**
  * Created by Ryan on 8/12/2015.

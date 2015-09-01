@@ -1,9 +1,9 @@
-package main;
+package rd.particleplay;
 
 /**
  * Created by Ryan on 8/9/2015.
  */
-public class HeapSort{
+public abstract class HeapSort{
 
     //Do not use position 0 out of convenience
 
@@ -29,7 +29,6 @@ public class HeapSort{
 
     public static void sink(Comparable[] array, int heapSize, int k)
     {
-
         //while we are not at the end of a heap arm
         while (leftChildIndex(k) <= heapSize)
         {
@@ -57,7 +56,6 @@ public class HeapSort{
 
     public static void swim(Comparable[] array, int k)
     {
-
         while (k > 1 && valueIsLessThan(array, parentIndexOf(k), k))
         {
             exchangeValues(array, k, parentIndexOf(k));

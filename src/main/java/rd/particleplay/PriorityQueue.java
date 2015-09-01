@@ -1,4 +1,4 @@
-package main;
+package rd.particleplay;
 
 import java.util.Arrays;
 
@@ -55,5 +55,4 @@ public class PriorityQueue<T extends Comparable<T>> {
     }
 
     public boolean isEmpty(){ return N == 0; }
-    public int size(){ return N; }
 }

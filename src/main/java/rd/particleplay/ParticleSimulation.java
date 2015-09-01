@@ -1,4 +1,4 @@
-package main;
+package rd.particleplay;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public class ParticleSimulation extends JPanel{
 
-    private PriorityQueue<main.Event> events;
+    PriorityQueue<Event> events;
 
     private double t = 0.0;
     private double hz = 1;
@@ -33,11 +33,11 @@ public class ParticleSimulation extends JPanel{
             predictCollisions(particles[i], limit);
         }
 
-        events.insert(new main.Event(0, null, null));
+        events.insert(new Event(0, null, null));
 
         while(true)
         {
-            main.Event event = events.deleteMinimum();
+            Event event = events.deleteMinimum();
             if(!event.isValid()) { continue; }
 
             for(int i = 0; i < particles.length; i++)
@@ -63,7 +63,7 @@ public class ParticleSimulation extends JPanel{
     {
         repaint();
 
-        if(t < limit) {events.insert(new main.Event(t + 1/hz, null, null));}
+        if(t < limit) {events.insert(new Event(t + 1/hz, null, null));}
     }
 
     public void paintComponent(Graphics g) {
@@ -90,14 +90,14 @@ public class ParticleSimulation extends JPanel{
         for(int i = 0; i < particles.length; i++)
         {
             double dt = a.timeToHit(particles[i]);
-            if(t + dt <= limit){ events.insert(new main.Event(t+dt, a, particles[i])); }
+            if(t + dt <= limit){ events.insert(new Event(t+dt, a, particles[i])); }
         }
 
         double dtX = a.timeToHitHorizontalWall(this.getWidth());
-        if(t + dtX <= limit){ events.insert(new main.Event(t+dtX, a, null)); }
+        if(t + dtX <= limit){ events.insert(new Event(t+dtX, a, null)); }
 
         double dtY = a.timeToHitVerticleWall(this.getHeight());
-        if(t + dtY <= limit){ events.insert(new main.Event(t+dtY, null, a)); }
+        if(t + dtY <= limit){ events.insert(new Event(t+dtY, null, a)); }
     }
 
 
