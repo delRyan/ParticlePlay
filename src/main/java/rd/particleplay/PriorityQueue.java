@@ -11,13 +11,15 @@ public class PriorityQueue<T extends Comparable<T>> {
     private T[] array;
 
     //Creates a new PQ with the given size.
-    public PriorityQueue(int size){
-        array = (T[]) new Comparable[size];
-    }
+    public PriorityQueue(){ array = (T[]) new Comparable[10]; }
+    public PriorityQueue(int size){ array = (T[]) new Comparable[size]; }
 
-    //Inserts a new item into the queue.
-    public void insert(T item)
-    {
+    /**Inserts an item into the queue. Throws IllegalArgumentException
+     * if the item is null.
+     */
+    public void insert(T item){
+        if(item == null){ throw new IllegalArgumentException("Item cannot be null."); }
+
         N++;
 
         growArray();
@@ -26,9 +28,12 @@ public class PriorityQueue<T extends Comparable<T>> {
         HeapSort.swim(array, N);
     }
 
-    //Removes and returns the minimum item in the queue.
-    public T deleteMinimum()
-    {
+    /**Removes and returns the minimum item in the queue. Throws IndexOutOfBoundsException
+     * if the queue is empty.
+     */
+    public T removeMinimum(){
+        if(N == 0){ throw new IndexOutOfBoundsException("The Queue is empty.");}
+
         T min = array[N];
         array[N] = null;
         N--;
@@ -38,17 +43,21 @@ public class PriorityQueue<T extends Comparable<T>> {
         return min;
     }
 
-    //Returns the minimum item in the queue.
-    public T minimum(){ return array[N]; }
+    /**Returns the minimum item in the queue. Throws IndexOutOfBoundsException
+     * if the queue is empty.
+     */
+    public T minimum(){
+        if(N == 0){ throw new IndexOutOfBoundsException("The Queue is empty.");}
 
-    private void growArray()
-    {
+        return array[N];
+    }
+
+    private void growArray(){
         if(N >= array.length){
             array = Arrays.copyOf(array, array.length*2);
         }
     }
-    private void shrinkArray()
-    {
+    private void shrinkArray(){
         if(N < array.length/4){
             array = Arrays.copyOf(array, array.length/2);
         }

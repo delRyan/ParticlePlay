@@ -37,7 +37,7 @@ public class ParticleSimulation extends JPanel{
 
         while(true)
         {
-            Event event = events.deleteMinimum();
+            Event event = events.removeMinimum();
             if(!event.isValid()) { continue; }
 
             for(int i = 0; i < particles.length; i++)

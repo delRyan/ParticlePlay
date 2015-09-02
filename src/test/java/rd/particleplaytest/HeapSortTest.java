@@ -6,6 +6,8 @@ import rd.particleplay.HeapSort;
 
 /**
  * Created by Ryan on 8/30/2015.
+ * The HeapSort class does not use index 0 of the array for easier implementation.
+ * The heap is also traditionally kept with larger values on top and smaller values on the bottom.
  */
 public class HeapSortTest {
 
