@@ -5,19 +5,19 @@ package rd.particleplay;
  */
 public abstract class HeapSort{
 
-    //Do not use position 0 out of convenience
+        //Do not use position 0 out of convenience
 
-    public static <T> Comparable<T>[] sort(Comparable<T>[] array)
-    {
-        int N = array.length - 1;
-
-        //start from the smallest node that has children (heapSize/2) and work your way up sinking nodes to create the heap.
-        for(int k = N/2; k >= 1; k--)
+        public static <T> Comparable<T>[] sort(Comparable<T>[] array)
         {
-            sink(array, N, k);
-        }
+            int N = array.length - 1;
 
-        //exchange the largest element with the smallest spot, decrease the heap size by 1 and repair the heap.
+            //start from the smallest node that has children (heapSize/2) and work your way up sinking nodes to create the heap.
+            for(int k = N/2; k >= 1; k--)
+            {
+                sink(array, N, k);
+            }
+
+            //exchange the largest element with the smallest spot, decrease the heap size by 1 and repair the heap.
         while(N > 1)
         {
             exchangeValues(array, N--, 1);
@@ -32,18 +32,20 @@ public abstract class HeapSort{
         //while we are not at the end of a heap arm
         while (leftChildIndex(k) <= heapSize)
         {
-            //if 2 children exist and the right is larger.
-            if(leftChildIndex(k) < heapSize && valueIsLessThan(array, leftChildIndex(k), rightChildIndex(k))){
+            //if 2 children exist and the left is larger.
+            if(leftChildIndex(k) < heapSize && valueIsGreaterThan(array, leftChildIndex(k), rightChildIndex(k))){
 
-                if(valueIsLessThan(array, k, rightChildIndex(k))){
+                if(valueIsGreaterThan(array, k, rightChildIndex(k))){
                     exchangeValues(array, k, rightChildIndex(k));
                     k = rightChildIndex(k);
+                    continue;
                 }
 
-                continue;
+                //k is smaller than the right child, and the left is larger than the right.
+                break;
             }
 
-            if(valueIsLessThan(array, k, leftChildIndex(k))){
+            if(valueIsGreaterThan(array, k, leftChildIndex(k))){
                 exchangeValues(array, k, leftChildIndex(k));
                 k = leftChildIndex(k);
 
@@ -56,16 +58,16 @@ public abstract class HeapSort{
 
     public static void swim(Comparable[] array, int k)
     {
-        while (k > 1 && valueIsLessThan(array, parentIndexOf(k), k))
+        while (k > 1 && valueIsGreaterThan(array, parentIndexOf(k), k))
         {
             exchangeValues(array, k, parentIndexOf(k));
             k = parentIndexOf(k);
         }
     }
 
-    public static boolean valueIsLessThan(Comparable[] array, int indexI, int indexJ)
+    public static boolean valueIsGreaterThan(Comparable[] array, int indexI, int indexJ)
     {
-        return array[indexI].compareTo(array[indexJ]) < 0;
+        return array[indexI].compareTo(array[indexJ]) > 0;
     }
 
     public static void exchangeValues(Comparable[] array, int i, int j)

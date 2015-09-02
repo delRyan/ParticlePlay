@@ -32,12 +32,15 @@ public class PriorityQueue<T extends Comparable<T>> {
      * if the queue is empty.
      */
     public T removeMinimum(){
-        if(N == 0){ throw new IndexOutOfBoundsException("The Queue is empty.");}
+        if(N <= 0){ throw new IndexOutOfBoundsException("The Queue is empty.");}
+
+        HeapSort.exchangeValues(array, 1, N);
 
         T min = array[N];
         array[N] = null;
         N--;
 
+        HeapSort.sink(array, N, 1);
         shrinkArray();
 
         return min;
@@ -49,7 +52,7 @@ public class PriorityQueue<T extends Comparable<T>> {
     public T minimum(){
         if(N == 0){ throw new IndexOutOfBoundsException("The Queue is empty.");}
 
-        return array[N];
+        return array[1];
     }
 
     private void growArray(){

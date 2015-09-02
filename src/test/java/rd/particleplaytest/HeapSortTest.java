@@ -12,10 +12,10 @@ import rd.particleplay.HeapSort;
 public class HeapSortTest {
 
     @Test
-    public void sort_correctlySorts(){
+    public void HeapSort_correctlyInverseSorts(){
         //Position 0 is unused.
         Integer[] array = new Integer[]{0, 1, 6 ,7, 8, 5, 4, 9, 3, 2, 10};
-        Integer[] expectedArray = new Integer[]{0, 1, 2 ,3, 4, 5, 6, 7, 8, 9, 10};
+        Integer[] expectedArray = new Integer[]{0, 10, 9 ,8, 7, 6, 5, 4, 3, 2, 1};
 
         HeapSort.sort(array);
 
@@ -23,10 +23,10 @@ public class HeapSortTest {
     }
 
     @Test
-    public void sink_smallestValueMovesToBottom(){
+    public void sink_largestValueMovesToBottom(){
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 1, 2 ,3};
-        Integer[] expectedArray = new Integer[]{0, 3, 2 ,1};
+        Integer[] array = new Integer[]{0, 3, 2 ,1};
+        Integer[] expectedArray = new Integer[]{0, 1, 2 ,3};
 
         HeapSort.sink(array, array.length - 1, 1);
 
@@ -34,10 +34,10 @@ public class HeapSortTest {
     }
 
     @Test
-    public void sink_leftChildStaysAtTop(){
+    public void sink_leftChildStays(){
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 5, 4, 3, 2, 1};
-        Integer[] expectedArray = new Integer[]{0, 5, 4, 3, 2, 1};
+        Integer[] array = new Integer[]{0, 1, 2, 3, 4, 5};
+        Integer[] expectedArray = new Integer[]{0, 1, 2, 3, 4, 5};
 
         HeapSort.sink(array, array.length - 1, 2);
 
@@ -45,10 +45,10 @@ public class HeapSortTest {
     }
 
     @Test
-    public void sink_rightChildStaysAtTop(){
+    public void sink_rightChildStays(){
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 5, 4, 3, 2, 1};
-        Integer[] expectedArray = new Integer[]{0, 5, 4, 3, 2, 1};
+        Integer[] array = new Integer[]{0, 1, 2, 3, 4, 5};
+        Integer[] expectedArray = new Integer[]{0, 1, 2, 3, 4, 5};
 
         HeapSort.sink(array, array.length - 1, 3);
 
@@ -58,8 +58,8 @@ public class HeapSortTest {
     @Test
     public void sink_parentTakesLeftLargerChild(){
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 5, 6, 4, 1};
-        Integer[] expectedArray = new Integer[]{0, 6, 5, 4, 1};
+        Integer[] array = new Integer[]{0, 4, 1, 5, 6};
+        Integer[] expectedArray = new Integer[]{0, 1, 4, 5, 6};
 
         HeapSort.sink(array, array.length - 1, 1);
 
@@ -69,8 +69,8 @@ public class HeapSortTest {
     @Test
     public void sink_parentTakesRightLargerChild(){
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 5, 4, 6, 1};
-        Integer[] expectedArray = new Integer[]{0, 6, 4, 5, 1};
+        Integer[] array = new Integer[]{0, 4, 5, 1, 6};
+        Integer[] expectedArray = new Integer[]{0, 1, 5, 4, 6};
 
         HeapSort.sink(array, array.length - 1, 1);
 
@@ -78,10 +78,10 @@ public class HeapSortTest {
     }
 
     @Test
-    public void swim_largestValueMovesToTop(){
+    public void swim_smallestValueMovesToTop(){
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 1, 2 ,3};
-        Integer[] expectedArray = new Integer[]{0, 3, 2 ,1};
+        Integer[] array = new Integer[]{0, 3, 2 ,1};
+        Integer[] expectedArray = new Integer[]{0, 1, 2 ,3};
 
         HeapSort.swim(array, 3);
 
@@ -91,8 +91,8 @@ public class HeapSortTest {
     @Test
     public void swim_leftChildStaysAtBottom() {
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 3, 2 ,1};
-        Integer[] expectedArray = new Integer[]{0, 3, 2 ,1};
+        Integer[] array = new Integer[]{0, 1, 3, 2};
+        Integer[] expectedArray = new Integer[]{0, 1, 3 ,2};
 
         HeapSort.swim(array, 2);
 
@@ -102,8 +102,8 @@ public class HeapSortTest {
     @Test
     public void swim_rightChildStaysAtBottom() {
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 3, 1 ,2};
-        Integer[] expectedArray = new Integer[]{0, 3, 1 ,2};
+        Integer[] array = new Integer[]{0, 1, 2 ,3};
+        Integer[] expectedArray = new Integer[]{0, 1, 2 ,3};
 
         HeapSort.swim(array, 3);
 
@@ -113,8 +113,8 @@ public class HeapSortTest {
     @Test
     public void swim_childTakesParentButNotTop() {
         //Position 0 is unused.
-        Integer[] array = new Integer[]{0, 6, 3, 3, 4};
-        Integer[] expectedArray = new Integer[]{0, 6, 4, 3, 3};
+        Integer[] array = new Integer[]{0, 3, 5, 5, 4};
+        Integer[] expectedArray = new Integer[]{0, 3, 4, 5, 5};
 
         HeapSort.swim(array, 4);
 
@@ -123,28 +123,28 @@ public class HeapSortTest {
 
 
     @Test
-    public void valueIsLessThan_trueForLesserFirstArgument(){
-        Integer[] array = new Integer[]{1, 2};
+    public void valueIsGreaterThan_trueForGreaterFirstArgument(){
+        Integer[] array = new Integer[]{2, 1};
 
-        Boolean result = HeapSort.valueIsLessThan(array, 0, 1);
+        Boolean result = HeapSort.valueIsGreaterThan(array, 0, 1);
 
         Assert.assertTrue(result);
     }
 
     @Test
-    public void valueIsLessThan_falseForGreaterFirstArgument(){
-        Integer[] array = new Integer[]{2, 1};
+    public void valueIsGreaterThan_falseForGreaterSecondArgument(){
+        Integer[] array = new Integer[]{1, 2};
 
-        Boolean result = HeapSort.valueIsLessThan(array, 0, 1);
+        Boolean result = HeapSort.valueIsGreaterThan(array, 0, 1);
 
         Assert.assertFalse(result);
     }
 
     @Test
-    public void valueIsLessThan_falseForEqualArguments(){
+    public void valueIsGreaterThan_falseForEqualArguments(){
         Integer[] array = new Integer[]{1, 2};
 
-        Boolean result = HeapSort.valueIsLessThan(array, 1, 1);
+        Boolean result = HeapSort.valueIsGreaterThan(array, 1, 1);
 
         Assert.assertFalse(result);
     }

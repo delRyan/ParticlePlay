@@ -24,16 +24,16 @@ public class PriorityQueueTest {
         pq.insert(4);
         pq.insert(7);
 
-        Assert.assertEquals((int)pq.removeMinimum(), 1);
-        Assert.assertEquals((int)pq.removeMinimum(), 2);
-        Assert.assertEquals((int)pq.removeMinimum(), 3);
-        Assert.assertEquals((int)pq.removeMinimum(), 4);
-        Assert.assertEquals((int)pq.removeMinimum(), 5);
-        Assert.assertEquals((int)pq.removeMinimum(), 6);
-        Assert.assertEquals((int)pq.removeMinimum(), 7);
-        Assert.assertEquals((int)pq.removeMinimum(), 8);
-        Assert.assertEquals((int)pq.removeMinimum(), 9);
-        Assert.assertEquals((int)pq.removeMinimum(), 10);
+        Assert.assertEquals(1, (int) pq.removeMinimum());
+        Assert.assertEquals(2, (int) pq.removeMinimum());
+        Assert.assertEquals(3, (int) pq.removeMinimum());
+        Assert.assertEquals(4, (int) pq.removeMinimum());
+        Assert.assertEquals(5, (int) pq.removeMinimum());
+        Assert.assertEquals(6, (int) pq.removeMinimum());
+        Assert.assertEquals(7, (int) pq.removeMinimum());
+        Assert.assertEquals(8, (int) pq.removeMinimum());
+        Assert.assertEquals(9, (int) pq.removeMinimum());
+        Assert.assertEquals(10,(int) pq.removeMinimum());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class PriorityQueueTest {
         pq.insert(9);
         pq.removeMinimum();
 
-        Assert.assertEquals(pq.isEmpty(), true);
+        Assert.assertEquals(true, pq.isEmpty());
     }
 
 
@@ -70,7 +70,7 @@ public class PriorityQueueTest {
         pq.insert(9);
         pq.insert(1);
 
-        Assert.assertEquals((int)pq.removeMinimum(), 1);
+        Assert.assertEquals(1, (int)pq.removeMinimum());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PriorityQueueTest {
         pq.insert(1);
         pq.insert(9);
 
-        Assert.assertEquals((int)pq.removeMinimum(), 1);
+        Assert.assertEquals(1, (int)pq.removeMinimum());
     }
 
     @Test(expected=IndexOutOfBoundsException.class)
@@ -102,7 +102,7 @@ public class PriorityQueueTest {
         pq.insert(9);
         pq.insert(1);
 
-        Assert.assertEquals((int)pq.minimum(), 1);
+        Assert.assertEquals(1, (int)pq.minimum());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class PriorityQueueTest {
         pq.insert(1);
         pq.insert(9);
 
-        Assert.assertEquals((int)pq.minimum(), 1);
+        Assert.assertEquals(1, (int)pq.minimum());
     }
 
     @Test
