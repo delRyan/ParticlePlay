@@ -61,6 +61,11 @@ public class ParticleSimulation extends JPanel{
 
     public void redraw()
     {
+        try {
+           Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+         }
         repaint();
 
         if(t < limit) {events.insert(new Event(t + 1/hz, null, null));}
@@ -71,16 +76,9 @@ public class ParticleSimulation extends JPanel{
 
         Graphics2D gg = (Graphics2D)g;
 
-        for(int i = 0; i < particles.length; i++)
-        {
+        for(int i = 0; i < particles.length; i++) {
             particles[i].draw(gg);
-            //particles[i].move(hz);
         }
-        //try {
-         //   Thread.sleep(100);
-        //} catch (InterruptedException e) {
-        //    e.printStackTrace();
-       // }
     }
 
     public void predictCollisions(Particle a, double limit)
@@ -94,10 +92,10 @@ public class ParticleSimulation extends JPanel{
         }
 
         double dtX = a.timeToHitHorizontalWall(this.getWidth());
-        if(t + dtX <= limit){ events.insert(new Event(t+dtX, a, null)); }
+        if(t + dtX <= limit){ events.insert(new Event(t+dtX, null, a)); }
 
         double dtY = a.timeToHitVerticleWall(this.getHeight());
-        if(t + dtY <= limit){ events.insert(new Event(t+dtY, null, a)); }
+        if(t + dtY <= limit){ events.insert(new Event(t+dtY, a, null)); }
     }
 
 
@@ -126,6 +124,6 @@ public class ParticleSimulation extends JPanel{
 
         mainFrame.setVisible(true);
 
-        sim.simulate(10000, 1);
+        sim.simulate(1000000000, 1);
     }
 }
