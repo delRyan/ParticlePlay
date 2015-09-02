@@ -61,11 +61,6 @@ public class ParticleSimulation extends JPanel{
 
     public void redraw()
     {
-        try {
-           Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-         }
         repaint();
 
         if(t < limit) {events.insert(new Event(t + 1/hz, null, null));}
@@ -91,10 +86,10 @@ public class ParticleSimulation extends JPanel{
             if(t + dt <= limit){ events.insert(new Event(t+dt, a, particles[i])); }
         }
 
-        double dtX = a.timeToHitHorizontalWall(this.getWidth());
+        double dtX = a.timeToHitHorizontalWall(this.getWidth() - 1);
         if(t + dtX <= limit){ events.insert(new Event(t+dtX, null, a)); }
 
-        double dtY = a.timeToHitVerticleWall(this.getHeight());
+        double dtY = a.timeToHitVerticalWall(this.getHeight() - 1);
         if(t + dtY <= limit){ events.insert(new Event(t+dtY, a, null)); }
     }
 
@@ -105,25 +100,26 @@ public class ParticleSimulation extends JPanel{
         JFrame mainFrame = new JFrame("Particle Play");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        int numberOfParticles = 10;
+        int numberOfParticles = 150;
         int sideSize = 600;
 
+        mainFrame.getContentPane().setPreferredSize(new Dimension(sideSize, sideSize));
+        mainFrame.setResizable(false);
+
         Particle[] initParticles = new Particle[numberOfParticles];
-        for(int i = 0; i < numberOfParticles; i++)
-        {
+        for(int i = 0; i < numberOfParticles; i++) {
             initParticles[i] = new Particle();
         }
 
         ParticleSimulation sim = new ParticleSimulation(initParticles);
+        sim.setPreferredSize(new Dimension(sideSize, sideSize));
+        sim.setBackground(Color.white);
 
-        mainFrame.setPreferredSize(new Dimension(sideSize, sideSize));
-        mainFrame.setResizable(false);
-
-        mainFrame.add(sim);
+        mainFrame.add(sim, BorderLayout.WEST);
         mainFrame.pack();
 
         mainFrame.setVisible(true);
 
-        sim.simulate(1000000000, 1);
+        sim.simulate(1000000000, 100000);
     }
 }
